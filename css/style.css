@@ -65,6 +65,11 @@ img {
     text-align: justify;
 }
 
+.open {
+    display: flex !important;
+    flex-direction: column;
+}
+
 /*-------------------------------TEXT SAMPLE*/
 
 /* ------------header */
@@ -75,6 +80,7 @@ img {
     background-size: cover;
     color: white;
     height: 701px;
+    z-index: 1;
 }
 
 .header-flex {
@@ -93,8 +99,6 @@ img {
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
-    /* identical to box height */
-
     display: flex;
     align-items: center;
     text-transform: uppercase;
@@ -183,6 +187,57 @@ img {
 
 .main-button button:hover {
     background: linear-gradient(91.1deg, rgba(244, 246, 245, 0.9) -7.89%, #d3cac9 102.55%);
+}
+
+.burger-menu {
+    display: none;
+    position: relative;
+    z-index: 50;
+    align-items: center;
+    justify-content: flex-end;
+    width: 30px;
+    height: 18px;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.burger-menu span {
+    height: 2px;
+    width: 100%;
+    transform: scale(1);
+    background-color: #fafafa;
+}
+
+.burger-menu::before,
+.burger-menu::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background-color: #fafafa;
+    transition: all 0.3s ease 0s;
+}
+
+.burger-menu::before {
+    top: 0;
+}
+
+.burger-menu::after {
+    bottom: 0;
+}
+
+.burger-menu.active span {
+    transform: scale(0)
+}
+
+.burger-menu.active::before {
+    top: 50%;
+    transform: rotate(45deg) translate(0, -50%)
+}
+
+.burger-menu.active::after {
+    bottom: 50%;
+    transform: rotate(135deg) translate(0, -50%)
 }
 
 /* -------------about */
@@ -381,63 +436,6 @@ img {
     background-image: url(../img/iwwa-file-csv.png);
 }
 
-@media screen and (max-width: 1440px) {
-    .container {
-        padding: 65px 15px;
-    }
-}
-
-@media screen and (max-width: 1200px) {
-    .container {
-        padding-bottom: 200px;
-    }
-
-    .pos-grd {
-        grid-template-columns: repeat(2, 1fr);
-        row-gap: 150px;
-    }
-
-    .tech-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-}
-
-@media screen and (max-width: 800px) {
-
-    .pos-grid,
-    .tech-grid {
-        grid-template-columns: repeat(1, 1fr);
-    }
-}
-
-@media screen and (max-width: 430px) {
-
-    .pos-grid-item,
-    .tech-grid-item {
-        width: 100%;
-        padding: 0px;
-    }
-
-    .pos-grid-inside,
-    .tech-inside {
-        padding: 10px;
-        width: 90%;
-        height: auto;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 50;
-    }
-
-    .pos-grid {
-        row-gap: 100px;
-    }
-
-    .tech-grid {
-        row-gap: 30px;
-    }
-}
-
 /* --------------------------------econom */
 .econom {
     background-color: #ED4C5C;
@@ -517,7 +515,7 @@ img {
 }
 
 .input {
-    width: 540px;
+    max-width: 540px;
     min-height: 60px;
     border: 1px solid #333333;
     border-radius: 6px;
@@ -541,4 +539,186 @@ input::placeholder {
 .write-button button {
     background-color: #ED4C5C;
     color: #fafafa;
+}
+
+/* -----------------------footer */
+.footer {
+    background-color: #FAFAFA;
+    min-height: 245px;
+    margin-bottom: 100px;
+}
+
+.footer-flex {
+    padding-top: 43px;
+
+}
+
+.footer-adress {
+    max-width: 204px;
+}
+
+.footer-h3 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 30px;
+}
+
+.footer-p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+    margin-bottom: 45px;
+}
+
+/* --------------------media */
+@media screen and (max-width: 1440px) {
+    .container {
+        padding: 20px 15px 0;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .pos-grd {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 150px;
+    }
+
+    .tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media screen and (max-width: 800px) {
+    .header-nav ul {
+        display: block;
+        margin-left: 20px;
+        row-gap: 30px;
+        width: 0;
+    }
+
+    .header-nav li {
+        margin: 0;
+        margin-bottom: 30px;
+    }
+
+    .burger-menu {
+        position: fixed;
+        display: flex;
+        margin: 220px;
+        padding: 0;
+    }
+
+    .header-nav {
+        display: none;
+        flex-direction: column;
+        color: #2E2F32;
+        padding: 0;
+        margin: 0;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        overflow-y: auto;
+        background: linear-gradient(91.1deg, rgba(244, 246, 245, 0.9) -7.89%, rgba(255, 255, 255, 0.9) 132.55%);
+        animation: burgerAnimation 0.4s;
+    }
+
+    @keyframes burgerAnimation {
+        from {
+            opacity: 0
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    .pos-grid,
+    .tech-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .burger-menu {
+        margin-left: 200px;
+    }
+
+    .header-text {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 42px;
+        line-height: 84px;
+        text-align: center;
+    }
+
+    .header-p {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        padding-top: 20px;
+        margin-bottom: 20px;
+        width: 300px;
+    }
+
+    .main-button button {
+        width: 160px;
+        height: 50px;
+        color: #ED4C5C;
+        background: #FFFFFF;
+        border-radius: 6px;
+        text-transform: uppercase;
+        border: 1px solid #FFFFFF;
+        cursor: pointer;
+        align-self: center;
+    }
+
+    .pos-grid-item,
+    .tech-grid-item {
+        width: 100%;
+        padding: 0px;
+    }
+
+    .about-flex,
+    .write-flex {
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .about-pic img {
+        padding-right: 0;
+        padding-top: 10px;
+    }
+
+    .econom {
+        padding: 0;
+    }
+
+    .pos-grid-inside,
+    .tech-inside {
+        padding: 10px;
+        width: 90%;
+        height: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 50;
+    }
+
+    .pos-grid {
+        row-gap: 100px;
+    }
+
+    .tech-grid {
+        row-gap: 30px;
+    }
 }
